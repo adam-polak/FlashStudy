@@ -1,7 +1,7 @@
 export default function Home() {
   return (
-    <main className="">
-      <h1>Home Page</h1>
+    <main className="flex flex-col items-center p-10">
+      <div className="flex text-red-300">Home Page</div>
     </main>
   );
 }

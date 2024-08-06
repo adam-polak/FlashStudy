@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import Link from "next/link";
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -18,13 +19,24 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <div className="bg-red-400 flex flex-wrap items-center justify-between mx-auto p-4">
-          <button className="self-center text-3xl font-bold whitespace-nowrap text-white">FlashStudy</button>
+          <button className="self-center text-2xl md:text-3xl font-bold whitespace-nowrap text-white">
+            <Link
+              href={'/'}
+            >
+              FlashStudy
+            </Link>
+          </button>
           <div className="flex items-center">
-            <button className="flex items-center w-20 h-12 hover:bg-red-700 bg-red-600 rounded-md">
-              <a href="http://youtube.com" className="font-medium p-4 text-xl text-white">Login</a>
+            <button className="flex items-center font-medium p-3 md:p-4 text-xl md:text-2xl text-white w-20 md:w-24 h-10 hover:bg-red-700 bg-red-600 rounded-md">
+              <Link
+                href={'/login'}
+              >
+                Login
+              </Link>
             </button>
           </div>
         </div>
+        <div style={{marginTop: 1 + 'em'}}></div>
         {children}
       </body>
     </html>
