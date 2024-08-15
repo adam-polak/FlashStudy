@@ -8,11 +8,11 @@ export default function Home() {
           <CardContent className="flex flex-col space-y-2">
             <div className="flex flex-col space-y-2">
               <p>Username</p>
-              <Input className="text-black font-normal focus-visible:ring-rose-400" type="text" placeholder="Username"></Input>
+              <Input className="text-black font-normal focus-visible:ring-rose-400" type="text" placeholder="username"></Input>
             </div>
             <div className="flex flex-col space-y-2">
               <p>Password</p>
-              <Input className="text-black font-normal focus-visible:ring-rose-400" type="password" placeholder="Password"></Input>
+              <Input className="text-black font-normal focus-visible:ring-rose-400" type="password" placeholder="password"></Input>
             </div>
             <div className="flex flex-col items-center p-5">
               <button className="rounded-lg bg-rose-500 w-full md:w-1/2 h-12">Sign In</button>

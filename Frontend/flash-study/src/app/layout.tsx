@@ -27,11 +27,11 @@ export default function RootLayout({
             </Link>
           </button>
           <div className="flex items-center">
-            <button className="flex items-center font-medium p-3 md:p-4 text-xl md:text-2xl text-white w-20 md:w-24 h-10 hover:bg-red-700 bg-red-600 rounded-md">
+            <button className="flex items-center font-medium p-3 md:p-4 text-xl md:text-2xl text-white w-30 md:w-34 h-10 hover:bg-red-700 bg-red-600 rounded-md">
               <Link
-                href={'/login'}
+                href={'/create'}
               >
-                Login
+                Sign Up
               </Link>
             </button>
           </div>
