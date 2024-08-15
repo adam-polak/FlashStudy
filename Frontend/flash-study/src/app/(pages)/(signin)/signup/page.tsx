@@ -5,7 +5,7 @@ import { Link } from "lucide-react";
 export default function Home() {
     return (
       <main className="flex flex-row justify-center items-center p-10">
-        <Card className="md:p-10 p-5 md:w-[60%] lg:w-[50%] w-[70%] h-[20em] md:h-[22em] bg-rose-300 text-white font-semibold">
+        <Card className="md:p-10 p-5 md:w-[60%] lg:w-[50%] w-[80%] h-[22em] bg-rose-300 text-white font-semibold">
           <CardContent className="flex flex-col space-y-2">
             <div className="flex flex-col space-y-2">
               <p>Username</p>
