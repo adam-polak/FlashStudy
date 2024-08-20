@@ -38,7 +38,7 @@ public class UserController : ControllerBase
     }
 
     [HttpGet("/loginkey/{key}")]
-    public IActionResult LoginToUser(int key)
+    public IActionResult LoginToUser(long key)
     {
         try {
             return Ok("key");
