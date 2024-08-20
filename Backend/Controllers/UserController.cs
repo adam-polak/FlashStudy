@@ -21,7 +21,7 @@ public class UserController : ControllerBase
     public IActionResult CreateUser(string username, string password)
     {
         try {
-            return Ok();
+            return Ok("cr/user/pass");
         } catch(Exception e) {
             return BadRequest(e.Message);
         }
@@ -31,7 +31,7 @@ public class UserController : ControllerBase
     public IActionResult LoginToUser(string username, string password)
     {
         try {
-            return Ok();
+            return Ok("user/pass");
         } catch(Exception e) {
             return BadRequest(e.Message);
         }
@@ -41,7 +41,7 @@ public class UserController : ControllerBase
     public IActionResult LoginToUser(int key)
     {
         try {
-            return Ok();
+            return Ok("key");
         } catch(Exception e) {
             return BadRequest(e.Message);
         }
