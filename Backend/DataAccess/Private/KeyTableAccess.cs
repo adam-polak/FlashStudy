@@ -18,12 +18,25 @@ public class KeyTableAccess
 
     public long LoginToUser(long key)
     {
+        if(!ContainsKey(key)) throw new Exception("Key invalid.");
         return key;
+    }
+
+    private bool IsKeyValid(long key)
+    {
+        //check date
+        return false;
     }
 
     private bool ContainsKey(long key)
     {
-        return false;
+        using(SqlConnection connection = new SqlConnection(connectionString))
+        {
+            connection.Open();
+            List<UserKeyModel> list = (List<UserKeyModel>)connection.Query($"SELECT * FROM {table} WHERE key={key};");
+            connection.Close();
+            return list.Count() != 0;
+        }
     }
 
     public long GenerateKeyForUser(string username)
