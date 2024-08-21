@@ -37,7 +37,7 @@ public class UserTableAccess
         using(SqlConnection connection = new SqlConnection(connectionString))
         {
             connection.Open();
-            List<UserModel> list = (List<UserModel>)connection.Query($"SELECT * FROM {table} WHERE CONVERT(VARCHAR, username)='{username}';");
+            List<UserModel> list = (List<UserModel>)connection.Query<UserModel>($"SELECT * FROM {table} WHERE CONVERT(VARCHAR, username)='{username}';");
             connection.Close();
             return list.Count() != 0;
         }
@@ -48,7 +48,7 @@ public class UserTableAccess
         using(SqlConnection connection = new SqlConnection(connectionString))
         {
             connection.Open();
-            List<UserModel> list = (List<UserModel>)connection.Query($"SELECT * FROM {table} WHERE CONVERT(VARCHAR, username)='{username}' AND password='{password}';");
+            List<UserModel> list = (List<UserModel>)connection.Query<UserModel>($"SELECT * FROM {table} WHERE CONVERT(VARCHAR, username)='{username}' AND CONVERT(VARCHAR, password)='{password}';");
             connection.Close();
             return list.Count() != 0;
         }
