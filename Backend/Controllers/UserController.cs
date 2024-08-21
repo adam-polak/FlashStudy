@@ -21,7 +21,8 @@ public class UserController : ControllerBase
     public IActionResult CreateUser(string username, string password)
     {
         try {
-            return Ok("cr/user/pass");
+            long key = userTable.CreateUser(username, password);
+            return Ok($"create {key}");
         } catch(Exception e) {
             return BadRequest(e.Message);
         }
@@ -31,17 +32,19 @@ public class UserController : ControllerBase
     public IActionResult LoginToUser(string username, string password)
     {
         try {
-            return Ok("user/pass");
+            long key = userTable.LoginToUser(username, password);
+            return Ok($"login {key}");
         } catch(Exception e) {
             return BadRequest(e.Message);
         }
     }
 
-    [HttpGet("/loginkey/{key}")]
-    public IActionResult LoginToUser(long key)
+    [HttpGet("/loginkey/{loginKey}")]
+    public IActionResult LoginToUser(long loginKey)
     {
         try {
-            return Ok("key");
+            long key = keyTable.LoginToUser(loginKey);
+            return Ok($"key {key}");
         } catch(Exception e) {
             return BadRequest(e.Message);
         }
