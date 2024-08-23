@@ -22,7 +22,7 @@ public class UserController : ControllerBase
     {
         try {
             long key = userTable.CreateUser(username, password);
-            return Ok($"create {key}");
+            return Ok(key);
         } catch(Exception e) {
             return BadRequest(e.Message);
         }
@@ -33,7 +33,7 @@ public class UserController : ControllerBase
     {
         try {
             long key = userTable.LoginToUser(username, password);
-            return Ok($"login {key}");
+            return Ok(key);
         } catch(Exception e) {
             return BadRequest(e.Message);
         }
@@ -44,7 +44,7 @@ public class UserController : ControllerBase
     {
         try {
             long key = keyTable.LoginToUser(loginKey);
-            return Ok($"key {key}");
+            return Ok(key);
         } catch(Exception e) {
             return BadRequest(e.Message);
         }
