@@ -1,6 +1,5 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { Link } from "lucide-react";
 
 export default async function Page() {
   return (
