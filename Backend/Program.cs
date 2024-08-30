@@ -7,7 +7,7 @@ builder.Services.AddControllers();
 
 builder.Services.AddCors(p => p.AddPolicy("corspolicy", build =>
 {
-    build.WithOrigins("https://flash-study-app.vercel.app/").AllowAnyMethod().AllowAnyHeader();
+    build.WithOrigins(Environment.GetEnvironmentVariable("Domain") ?? "http://localhost:3000/").AllowAnyMethod().AllowAnyHeader();
 }));
 
 var app = builder.Build();
