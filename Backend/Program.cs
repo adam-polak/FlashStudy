@@ -7,7 +7,7 @@ builder.Services.AddControllers();
 
 builder.Services.AddCors(p => p.AddPolicy("corspolicy", build =>
 {
-    build.WithOrigins(Environment.GetEnvironmentVariable("Domain") ?? "http://localhost:3000/").AllowAnyMethod().AllowAnyHeader();
+    build.WithOrigins(Environment.GetEnvironmentVariable("Domain") ?? "").AllowAnyMethod().AllowAnyHeader();
 }));
 
 var app = builder.Build();
@@ -19,9 +19,11 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseHttpsRedirection();
+
 app.UseCors("corspolicy");
 
-app.UseHttpsRedirection();
+app.UseAuthorization();
 
 app.MapControllers();
 

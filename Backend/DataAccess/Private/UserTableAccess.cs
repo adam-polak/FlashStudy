@@ -1,4 +1,5 @@
 using Backend.DataAccess.Models;
+using Backend.DataAccess.Exceptions;
 using Dapper;
 using Microsoft.Data.SqlClient;
 
@@ -20,7 +21,7 @@ public class UserTableAccess
 
     public long CreateUser(string username, string password)
     {
-        if(UserExists(username)) throw new Exception("Username already exists.");
+        if(UserExists(username)) throw new Exception(DataAccessExceptions.USERNAME_EXISTS);
         using(SqlConnection connection = new SqlConnection(connectionString)) 
         {
             connection.Open();
@@ -56,7 +57,7 @@ public class UserTableAccess
 
     public long LoginToUser(string username, string password)
     {
-        if(!CorrectLogin(username, password)) throw new Exception("Incorrect login.");
+        if(!CorrectLogin(username, password)) throw new Exception(DataAccessExceptions.INCORRECT_LOGIN);
         return keyTable.GenerateKeyForUser(username);
     }
 }

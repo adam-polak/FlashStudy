@@ -16,6 +16,8 @@ export async function useAuthentication(searchParams: ReadonlyURLSearchParams) {
 
 async function validateLoginKey(loginKey: string) : Promise<string> {
     const apiUrl = 'https://flashstudy-api.azurewebsites.net/loginkey/' + loginKey;
-    const response = fetch(apiUrl);
+    const response = await fetch(apiUrl);
+    const result = await response.text();
+    console.log(result);
     return '';
 }

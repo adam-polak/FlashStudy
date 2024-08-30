@@ -1,3 +1,4 @@
+using Backend.DataAccess.Exceptions;
 using Backend.DataAccess.Models;
 using Dapper;
 using Microsoft.Data.SqlClient;
@@ -18,7 +19,7 @@ public class KeyTableAccess
 
     public long LoginToUser(long key)
     {
-        if(!ContainsKey(key)) throw new Exception("Key invalid.");
+        if(!ContainsKey(key)) throw new Exception(DataAccessExceptions.INVALID_KEY);
         if(!IsKeyValid(key)) return GenerateNewKeyFromOld(key);
         else return key;
     }

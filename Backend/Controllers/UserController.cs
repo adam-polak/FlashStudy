@@ -1,4 +1,5 @@
 using Backend.DataAccess.Controllers;
+using Backend.DataAccess.Exceptions;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Backend.Controllers;
@@ -24,7 +25,7 @@ public class UserController : ControllerBase
             long key = userTable.CreateUser(username, password);
             return Ok(key);
         } catch(Exception e) {
-            return BadRequest(e.Message);
+            return BadRequest(DataAccessExceptions.HandleException(e.Message));
         }
     }
 
@@ -35,7 +36,7 @@ public class UserController : ControllerBase
             long key = userTable.LoginToUser(username, password);
             return Ok(key);
         } catch(Exception e) {
-            return BadRequest(e.Message);
+            return BadRequest(DataAccessExceptions.HandleException(e.Message));
         }
     }
 
@@ -46,7 +47,7 @@ public class UserController : ControllerBase
             long key = keyTable.LoginToUser(loginKey);
             return Ok(key);
         } catch(Exception e) {
-            return BadRequest(e.Message);
+            return BadRequest(DataAccessExceptions.HandleException(e.Message));
         }
     }
 
