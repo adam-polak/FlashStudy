@@ -4,13 +4,9 @@ import { useEffect } from "react";
 export async function useAuthentication(searchParams: ReadonlyURLSearchParams) {
     const loginKey = searchParams.get('i') ?? "";
     const router = useRouter();
+    const response = await validateLoginKey(loginKey);
     useEffect(() => {
-        if(loginKey === '' || isNaN(Number(loginKey))) router.push('/');
-        else {
-            const response = validateLoginKey(loginKey);
-            if(isNaN(Number(response))) {
-            }
-        }
+        if(isNaN(Number(response)) || Number(response) != Number(loginKey)) router.push('/');
     })
 }
 
@@ -18,6 +14,5 @@ async function validateLoginKey(loginKey: string) : Promise<string> {
     const apiUrl = 'https://flashstudy-api.azurewebsites.net/loginkey/' + loginKey;
     const response = await fetch(apiUrl);
     const result = await response.text();
-    console.log(result);
-    return '';
+    return result;
 }

@@ -7,7 +7,9 @@ builder.Services.AddControllers();
 
 builder.Services.AddCors(p => p.AddPolicy("corspolicy", build =>
 {
-    build.WithOrigins(Environment.GetEnvironmentVariable("Domain") ?? "").AllowAnyMethod().AllowAnyHeader();
+    build.WithOrigins(Environment.GetEnvironmentVariable("Domain") ?? "");
+    build.AllowAnyMethod();
+    build.AllowAnyHeader();
 }));
 
 var app = builder.Build();

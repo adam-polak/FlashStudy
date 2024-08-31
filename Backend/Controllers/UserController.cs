@@ -1,9 +1,12 @@
+using Backend.Controllers.Lib;
 using Backend.DataAccess.Controllers;
 using Backend.DataAccess.Exceptions;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Backend.Controllers;
 
+[EnableCors("corspolicy")]
 [ApiController]
 [Route("/user")]
 public class UserController : ControllerBase
@@ -21,6 +24,7 @@ public class UserController : ControllerBase
     [HttpPost("createuser/{username}/{password}")]
     public IActionResult CreateUser(string username, string password)
     {
+        Headers.AddCors(this);
         try {
             long key = userTable.CreateUser(username, password);
             return Ok(key);
@@ -32,6 +36,7 @@ public class UserController : ControllerBase
     [HttpGet("/login/{username}/{password}")]
     public IActionResult LoginToUser(string username, string password)
     {
+        Headers.AddCors(this);
         try {
             long key = userTable.LoginToUser(username, password);
             return Ok(key);
@@ -43,6 +48,7 @@ public class UserController : ControllerBase
     [HttpGet("/loginkey/{loginKey}")]
     public IActionResult LoginToUser(long loginKey)
     {
+        Headers.AddCors(this);
         try {
             long key = keyTable.LoginToUser(loginKey);
             return Ok(key);
