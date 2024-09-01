@@ -1,14 +1,11 @@
 import { ReadonlyURLSearchParams, useRouter } from "next/navigation";
-import { useEffect } from "react";
 
 export async function useAuthentication(searchParams: ReadonlyURLSearchParams) {
     const loginKey = searchParams.get('i') ?? "";
     const router = useRouter();
     const isValid = !isNaN(Number(loginKey));
     const response = isValid ? await validateLoginKey(loginKey) : 'invalid';
-    useEffect(() => {
-        if(isNaN(Number(response)) || Number(response) != Number(loginKey)) router.push('/');
-    })
+    if(Number(response) != Number(loginKey)) router.push('/');
 }
 
 async function validateLoginKey(loginKey: string) : Promise<string> {
