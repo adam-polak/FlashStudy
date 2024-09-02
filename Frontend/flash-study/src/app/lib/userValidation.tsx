@@ -5,7 +5,8 @@ export async function useAuthentication(searchParams: ReadonlyURLSearchParams) {
     const router = useRouter();
     const isValid = !isNaN(Number(loginKey));
     const response = isValid ? await validateLoginKey(loginKey) : 'invalid';
-    if(Number(response) != Number(loginKey)) router.push('/');
+    if(isNaN(Number(response))) router.push('/')
+    else if(Number(response) != Number(loginKey)) router.push(`/collection?i=${response}`);
 }
 
 async function validateLoginKey(loginKey: string) : Promise<string> {
