@@ -6,12 +6,6 @@ import { ApiResponses } from "@/lib/definitions";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
-
-function isCorrectLogin(username: string, password: string) {
-    const apiUrl = "https://flashstudy-api.azurewebsites.net/"
-    return false;
-}
-
 export function SignUp() {
     const router = useRouter();
     const [formData, setFormData] = useState({username: '', password: ''});
@@ -61,5 +55,48 @@ export function SignUp() {
 }
 
 export function Login() {
-    return <></>;
+    const router = useRouter();
+    const [formData, setFormData] = useState({username: '', password: ''});
+
+    function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
+        const {name, value} = e.target;
+        setFormData(prevData => ({...prevData, [name]: value}));
+    }
+
+    async function handleSubmit(e: React.ChangeEvent<HTMLFormElement>) {
+        e.preventDefault();
+        const response = await tryLogin(formData.username, formData.password);
+        if(response === ApiResponses.TryAgain) {
+
+        } else if(response === ApiResponses.IncorrectLogin) {
+
+        } else router.push(`/collection?i=${response}`);
+    }
+
+    async function tryLogin(username: string, password: string) {
+        const apiUrl = `https://flashstudy-api.azurewebsites.net/login/${username}/${password}`;
+        const response = await fetch(apiUrl);
+        const result = await response.text();
+        return result; 
+    }
+
+    return (
+        <form onSubmit={handleSubmit} className="flex flex-row justify-center items-center p-10">
+            <Card className="md:p-10 p-5 md:w-[60%] lg:w-[50%] w-[100%] h-[20em] bg-rose-300 text-white font-semibold">
+                <CardContent className="flex flex-col space-y-4">
+                    <div className="flex flex-col space-y-2">
+                        <p>Username</p>
+                        <Input value={formData.username} name="username" onChange={handleChange} className="text-black font-normal focus-visible:ring-rose-400" type="text" placeholder="username"></Input>
+                    </div>
+                    <div className="flex flex-col space-y-2">
+                        <p>Password</p>
+                        <Input value={formData.password} name="password" onChange={handleChange} className="text-black font-normal focus-visible:ring-rose-400" type="password" placeholder="password"></Input>
+                    </div>
+                    <div className="flex flex-col items-center p-5">
+                        <button type="submit" className="rounded-lg bg-rose-500 w-full md:w-1/2 h-12">Sign In</button>
+                    </div>
+                </CardContent>
+            </Card>
+        </form>
+    );
 }
