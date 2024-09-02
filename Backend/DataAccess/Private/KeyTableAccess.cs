@@ -87,6 +87,7 @@ public class KeyTableAccess
 
     public long GenerateKeyForUser(string username)
     {
+        ClearKeysForUser(username);
         long key = GenerateKey();
         using(SqlConnection connection = new SqlConnection(connectionString))
         {
@@ -97,6 +98,18 @@ public class KeyTableAccess
             cmd.ExecuteNonQuery();
             connection.Close();
             return key;
+        }
+    }
+
+    private void ClearKeysForUser(string username)
+    {
+        using(SqlConnection connection = new SqlConnection(connectionString))
+        {
+            connection.Open();
+            string sqlStr = $"DELETE FROM {table} WHERE username='{username}';";
+            SqlCommand cmd = new SqlCommand(sqlStr, connection);
+            cmd.ExecuteNonQuery();
+            connection.Close();
         }
     }
 }
