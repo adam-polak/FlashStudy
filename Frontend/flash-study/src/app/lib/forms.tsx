@@ -2,15 +2,18 @@
 
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
+import { ApiResponses } from "@/lib/definitions";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 
 function isCorrectLogin(username: string, password: string) {
+    const apiUrl = "https://flashstudy-api.azurewebsites.net/"
     return false;
 }
 
 export function SignUp() {
-
+    const router = useRouter();
     const [formData, setFormData] = useState({username: '', password: ''});
 
     function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -18,13 +21,21 @@ export function SignUp() {
         setFormData(prevData => ({...prevData, [name]: value}));
     }
 
-    function handleSubmit(e: React.ChangeEvent<HTMLFormElement>) {
+    async function handleSubmit(e: React.ChangeEvent<HTMLFormElement>) {
         e.preventDefault();
-        if(isCorrectLogin(formData.username, formData.password)) {
+        const response = await tryCreateUser(formData.username, formData.password);
+        if(response === ApiResponses.TryAgain) {
 
-        } else {
-            alert('try again');
-        }
+        } else if(response === ApiResponses.UsernameExists) {
+
+        } else router.push(`/collection?i=${response}`);
+    }
+
+    async function tryCreateUser(username: string, password: string) {
+        const apiUrl = `https://flashstudy-api.azurewebsites.net/user/createuser/${username}/${password}`;
+        const response = await fetch(apiUrl, {method: "POST"});
+        const result = await response.text();
+        return result;
     }
 
     return (

@@ -21,6 +21,12 @@ public class UserController : ControllerBase
         keyTable = new KeyTableAccess();
     }
 
+    [HttpGet("userexists/{username}")]
+    public IActionResult UserExists(string username)
+    {
+        return Ok();
+    }
+
     [HttpPost("createuser/{username}/{password}")]
     public IActionResult CreateUser(string username, string password)
     {
