@@ -1,21 +1,29 @@
 'use client'
 
+import { User } from "@/lib/definitions";
 import { ReadonlyURLSearchParams, useRouter, useSearchParams } from "next/navigation";
 
 async function useAuthentication(searchParams: ReadonlyURLSearchParams) {
     const loginKey = searchParams.get('i') ?? "";
     const router = useRouter();
     const isValid = !isNaN(Number(loginKey));
-    const response = isValid ? await validateLoginKey(loginKey) : 'invalid';
-    if(isNaN(Number(response))) router.push('/')
-    else if(Number(response) != Number(loginKey)) router.push(`/collection?i=${response}`);
+    if(isValid) {
+        const user = await getUserFromKey(loginKey);
+        if(user == null || isNaN(user.Key)) router.push('/');
+    } else router.push('/');
 }
 
-async function validateLoginKey(loginKey: string) : Promise<string> {
+export async function getUserFromKey(loginKey: string) : Promise<User | null> {
     const apiUrl = 'https://flashstudy-api.azurewebsites.net/loginkey/' + loginKey;
     const response = await fetch(apiUrl);
     const result = await response.text();
-    return result;
+    let obj: User | null;
+    try {
+        obj = JSON.parse(result);
+    } catch(error) {
+        obj = null;
+    }
+    return obj;
 }
 
 export function Authenticate() {

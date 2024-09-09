@@ -1,6 +1,6 @@
 'use client'
 
-import { Authenticate } from "@/app/lib/authScript";
+import { Authenticate } from "@/app/lib/users";
 import { Suspense } from "react";
 
 export default function Page() {

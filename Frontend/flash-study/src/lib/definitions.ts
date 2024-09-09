@@ -1,6 +1,6 @@
 export type User = {
-    username: string;
-    loginkey: number;
+    Username: string;
+    Key: number;
 }
 
 export class ApiResponses {

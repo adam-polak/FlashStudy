@@ -1,8 +1,10 @@
+using Backend.Controllers.Models;
 using Backend.Controllers.Lib;
 using Backend.DataAccess.Controllers;
 using Backend.DataAccess.Exceptions;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 namespace Backend.Controllers;
 
@@ -27,7 +29,9 @@ public class UserController : ControllerBase
         Headers.AddCors(this);
         try {
             long key = userTable.CreateUser(username, password);
-            return Ok(key);
+            User user = new User() { Username = username, Key = key };
+            string json = JsonConvert.SerializeObject(user);
+            return Ok(json);
         } catch(Exception e) {
             return BadRequest(DataAccessExceptions.HandleException(e.Message));
         }
@@ -39,7 +43,9 @@ public class UserController : ControllerBase
         Headers.AddCors(this);
         try {
             long key = userTable.LoginToUser(username, password);
-            return Ok(key);
+            User user = new User() { Username = username, Key = key };
+            string json = JsonConvert.SerializeObject(user);
+            return Ok(json);
         } catch(Exception e) {
             return BadRequest(DataAccessExceptions.HandleException(e.Message));
         }
@@ -51,7 +57,9 @@ public class UserController : ControllerBase
         Headers.AddCors(this);
         try {
             long key = keyTable.LoginToUser(loginKey);
-            return Ok(key);
+            User user = new User() { Username = "test", Key = key };
+            string json = JsonConvert.SerializeObject(user);
+            return Ok(json);
         } catch(Exception e) {
             return BadRequest(DataAccessExceptions.HandleException(e.Message));
         }

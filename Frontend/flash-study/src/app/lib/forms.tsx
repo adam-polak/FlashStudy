@@ -1,5 +1,6 @@
 'use client'
 
+import { User } from "@/lib/definitions";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { ApiResponses } from "@/lib/definitions";
@@ -18,18 +19,26 @@ export function SignUp() {
     async function handleSubmit(e: React.ChangeEvent<HTMLFormElement>) {
         e.preventDefault();
         const response = await tryCreateUser(formData.username, formData.password);
-        if(response === ApiResponses.TryAgain) {
+        if(typeof response === 'string') {
+            if(response === ApiResponses.UsernameExists) {
 
-        } else if(response === ApiResponses.UsernameExists) {
+            } else if(response === ApiResponses.TryAgain) {
 
-        } else router.push(`/collection?i=${response}`);
+            }
+        } else router.push(`/collection?i=${response.Key}`);
     }
 
-    async function tryCreateUser(username: string, password: string) {
+    async function tryCreateUser(username: string, password: string) : Promise<User | string> {
         const apiUrl = `https://flashstudy-api.azurewebsites.net/user/createuser/${username}/${password}`;
         const response = await fetch(apiUrl, {method: "POST"});
         const result = await response.text();
-        return result;
+        let obj: User | string;
+        try {
+            obj = JSON.parse(result);
+        } catch(error) {
+            obj = result;
+        }
+        return obj;
     }
 
     return (
@@ -66,18 +75,27 @@ export function Login() {
     async function handleSubmit(e: React.ChangeEvent<HTMLFormElement>) {
         e.preventDefault();
         const response = await tryLogin(formData.username, formData.password);
-        if(response === ApiResponses.TryAgain) {
 
-        } else if(response === ApiResponses.IncorrectLogin) {
+        if(typeof response === 'string') {
+            if(response === ApiResponses.IncorrectLogin) {
 
-        } else router.push(`/collection?i=${response}`);
+            } else if(response === ApiResponses.TryAgain) {
+
+            }
+        } else router.push(`/collection?i=${response.Key}`);
     }
 
-    async function tryLogin(username: string, password: string) {
+    async function tryLogin(username: string, password: string) : Promise<User | string> {
         const apiUrl = `https://flashstudy-api.azurewebsites.net/login/${username}/${password}`;
         const response = await fetch(apiUrl);
         const result = await response.text();
-        return result; 
+        let obj: User | string;
+        try {
+            obj = JSON.parse(result);
+        } catch(error) {
+            obj = result;
+        }
+        return obj;
     }
 
     return (
