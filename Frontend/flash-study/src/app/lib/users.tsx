@@ -13,7 +13,7 @@ async function useAuthentication(searchParams: ReadonlyURLSearchParams) {
     } else router.push('/');
 }
 
-export async function getUserFromKey(loginKey: string) : Promise<User | null> {
+async function getUserFromKey(loginKey: string) : Promise<User | null> {
     const apiUrl = 'https://flashstudy-api.azurewebsites.net/loginkey/' + loginKey;
     const response = await fetch(apiUrl);
     const result = await response.text();
@@ -24,6 +24,12 @@ export async function getUserFromKey(loginKey: string) : Promise<User | null> {
         obj = null;
     }
     return obj;
+}
+
+export async function getUser() : Promise<User | null> {
+    const loginKey = useSearchParams().get('i') ?? '';
+    const user = await getUserFromKey(loginKey);
+    return user;
 }
 
 export function Authenticate() {
