@@ -1,6 +1,6 @@
 'use client'
 
-import { User } from "@/lib/definitions";
+import { FlashStudyApi, User } from "@/lib/definitions";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { ApiResponses } from "@/lib/definitions";
@@ -29,7 +29,7 @@ export function SignUp() {
     }
 
     async function tryCreateUser(username: string, password: string) : Promise<User | string> {
-        const apiUrl = `https://flashstudy-api.azurewebsites.net/user/createuser/${username}/${password}`;
+        const apiUrl = `${FlashStudyApi}user/createuser/${username}/${password}`;
         const response = await fetch(apiUrl, {method: "POST"});
         const result = await response.text();
         let obj: User | string;
@@ -86,7 +86,7 @@ export function Login() {
     }
 
     async function tryLogin(username: string, password: string) : Promise<User | string> {
-        const apiUrl = `https://flashstudy-api.azurewebsites.net/login/${username}/${password}`;
+        const apiUrl = `${FlashStudyApi}login/${username}/${password}`;
         const response = await fetch(apiUrl);
         const result = await response.text();
         let obj: User | string;

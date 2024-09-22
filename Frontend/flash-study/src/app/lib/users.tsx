@@ -1,6 +1,6 @@
 'use client'
 
-import { User } from "@/lib/definitions";
+import { FlashStudyApi, User } from "@/lib/definitions";
 import { ReadonlyURLSearchParams, useRouter, useSearchParams } from "next/navigation";
 
 async function useAuthentication(searchParams: ReadonlyURLSearchParams) {
@@ -14,7 +14,7 @@ async function useAuthentication(searchParams: ReadonlyURLSearchParams) {
 }
 
 export async function getUserFromKey(loginKey: string) : Promise<User | null> {
-    const apiUrl = 'https://flashstudy-api.azurewebsites.net/loginkey/' + loginKey;
+    const apiUrl = `${FlashStudyApi}loginkey/${loginKey}`;
     const response = await fetch(apiUrl);
     const result = await response.text();
     let obj: User | null;
