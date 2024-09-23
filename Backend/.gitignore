@@ -3,6 +3,9 @@
 ##
 ## Get latest from `dotnet new gitignore`
 
+# Secrets
+SecretInfo.txt
+
 # dotenv files
 .env
 
