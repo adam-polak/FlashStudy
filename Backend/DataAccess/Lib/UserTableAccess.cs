@@ -14,8 +14,8 @@ public class UserTableAccess
 
     public UserTableAccess()
     {
-        connectionString = Environment.GetEnvironmentVariable("ConnectionString") ?? ConnectionInfo.ConnectionString();
-        table = Environment.GetEnvironmentVariable("UserTable") ?? ConnectionInfo.UserTable();
+        connectionString = Environment.GetEnvironmentVariable("ConnectionString") ?? ConnectionInfo.GetConnectionInfo("ConnectionString");
+        table = Environment.GetEnvironmentVariable("UserTable") ?? ConnectionInfo.GetConnectionInfo("UserTable");
         keyTable = new KeyTableAccess();
     }
 
