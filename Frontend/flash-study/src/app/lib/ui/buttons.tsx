@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { getUser } from "../users";
+import { useGetUser } from "../users";
 import { Suspense } from "react";
 
 export function SignUpButton() {
@@ -29,7 +29,7 @@ export function UserPageButton() {
 }
 
 async function UserIcon() {
-    const user = await getUser();
+    const user = await useGetUser();
     if(user == null) return <></>;
     else return (
         <Link
