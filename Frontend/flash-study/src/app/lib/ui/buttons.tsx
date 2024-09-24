@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { getKey, useGetUser } from "../users";
+import { useGetKey, useGetUser } from "../users";
 import { UserIcon } from "lucide-react";
 
 export function SignUpButton() {
@@ -32,7 +32,7 @@ export async function UserIconButton() {
 }
 
 export function CreateSetButton() {
-    const key = getKey();
+    const key = useGetKey();
     return (
         <>
         <Link className="flex flex-row text-2xl fond-bold rounded-lg text-white bg-green-400 p-1 mr-[-1em]"
