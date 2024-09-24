@@ -26,6 +26,11 @@ export async function getUserFromKey(loginKey: string) : Promise<User | null> {
     return obj;
 }
 
+export function getKey() : number {
+    const loginKey = useSearchParams().get('i') ?? '0';
+    return parseInt(loginKey);
+}
+
 export async function useGetUser() : Promise<User | null> {
     const loginKey = useSearchParams().get('i') ?? '';
     const user = await getUserFromKey(loginKey);

@@ -1,13 +1,19 @@
 'use client'
 
 import { Authenticate } from "@/app/lib/users";
-import { UserIconButton } from "@/app/lib/ui/buttons";
+import { CreateSetButton, UserIconButton } from "@/app/lib/ui/buttons";
 import { Suspense } from "react";
 
 export default function Page() {
   return (
     <>
-    <main className="flex flex-col items-center p-5">
+    <div className="flex flex-row justify-between space-x-11 items-end pl-10 pr-10">
+      <CreateSetButton />
+      <Suspense>
+        <UserIconButton />
+      </Suspense>
+    </div>
+    <main className="flex flex-col items-center">
       <Suspense>
         <Authenticate />
       </Suspense>
