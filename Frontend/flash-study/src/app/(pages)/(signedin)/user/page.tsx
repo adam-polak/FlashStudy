@@ -8,7 +8,9 @@ export default function Page() {
   return (
     <>
     <div className="flex flex-row justify-between space-x-11 items-end pl-10 pr-10">
-      <CreateSetButton />
+      <Suspense>
+        <CreateSetButton />
+      </Suspense>
       <Suspense>
         <UserIconButton />
       </Suspense>
