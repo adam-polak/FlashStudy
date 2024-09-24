@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { useGetUser } from "../users";
-import { Suspense } from "react";
 
 export function SignUpButton() {
     return (
@@ -11,18 +10,6 @@ export function SignUpButton() {
             >
                 Sign Up
             </Link>
-            </button>
-        </div></>
-    );
-}
-
-export function UserPageButton() {
-    return (
-        <><div className="flex items-center">
-            <button className="flex items-center font-medium p-3 md:p-4 text-xl md:text-2xl text-white w-30 md:w-34 h-10 hover:bg-red-700 bg-red-600 rounded-md">
-                <Suspense>
-                    <UserIconButton />
-                </Suspense>
             </button>
         </div></>
     );
