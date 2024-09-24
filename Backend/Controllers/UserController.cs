@@ -57,7 +57,7 @@ public class UserController : ControllerBase
         Headers.AddCors(this);
         try {
             long key = keyTable.LoginToUser(loginKey);
-            User user = new User() { Username = "test", Key = key };
+            User user = new User() { Username = keyTable.GetUsernameFromKey(key), Key = key };
             string json = JsonConvert.SerializeObject(user);
             return Ok(json);
         } catch(Exception e) {

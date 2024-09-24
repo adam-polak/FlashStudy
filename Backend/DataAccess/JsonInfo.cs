@@ -2,12 +2,12 @@ using Newtonsoft.Json;
 
 namespace Backend.DataAccess;
 
-public static class ConnectionInfo
+public static class JsonInfo
 {
-    public static string GetConnectionInfo(string type)
+    public static string GetJsonInfo(string type)
     {
         try {
-            using(JsonTextReader reader = new JsonTextReader(new StreamReader("hide.json")))
+            using(JsonTextReader reader = new JsonTextReader(new StreamReader("DataAccess/hide.json")))
             {
                 while(reader.Read())
                 {
@@ -20,7 +20,8 @@ public static class ConnectionInfo
                 }
             }
             return "";
-        } catch(Exception) {
+        } catch(Exception e) {
+            Console.WriteLine($"\nError: {e.Message}\n");
             return "";
         }
     }

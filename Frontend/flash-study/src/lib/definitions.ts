@@ -11,4 +11,4 @@ export class ApiResponses {
 }
 
 export const FlashStudyApi : string = "https://flashstudy-api.azurewebsites.net/";
-// export const FlashStudyApi : string = "http://localhost:" insert port "/";
+// export const FlashStudyApi : string = "http://localhost:5039/";

@@ -13,8 +13,8 @@ public class KeyTableAccess
 
     public KeyTableAccess()
     {
-        connectionString = Environment.GetEnvironmentVariable("ConnectionString") ?? ConnectionInfo.GetConnectionInfo("ConnectionString");
-        table = Environment.GetEnvironmentVariable("KeyTable") ?? ConnectionInfo.GetConnectionInfo("KeyTable");
+        connectionString = Environment.GetEnvironmentVariable("ConnectionString") ?? JsonInfo.GetJsonInfo("ConnectionString");
+        table = Environment.GetEnvironmentVariable("KeyTable") ?? JsonInfo.GetJsonInfo("KeyTable");
     }
 
     public long LoginToUser(long key)

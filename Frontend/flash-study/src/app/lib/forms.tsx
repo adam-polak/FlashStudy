@@ -25,7 +25,7 @@ export function SignUp() {
             } else if(response === ApiResponses.TryAgain) {
 
             }
-        } else router.push(`/collection?i=${response.Key}`);
+        } else router.push(`/public?i=${response.Key}`);
     }
 
     async function tryCreateUser(username: string, password: string) : Promise<User | string> {
@@ -82,7 +82,7 @@ export function Login() {
             } else if(response === ApiResponses.TryAgain) {
 
             }
-        } else router.push(`/collection?i=${response.Key}`);
+        } else router.push(`/public?i=${response.Key}`);
     }
 
     async function tryLogin(username: string, password: string) : Promise<User | string> {

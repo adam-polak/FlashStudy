@@ -21,14 +21,14 @@ export function UserPageButton() {
         <><div className="flex items-center">
             <button className="flex items-center font-medium p-3 md:p-4 text-xl md:text-2xl text-white w-30 md:w-34 h-10 hover:bg-red-700 bg-red-600 rounded-md">
                 <Suspense>
-                    <UserIcon />
+                    <UserIconButton />
                 </Suspense>
             </button>
         </div></>
     );
 }
 
-async function UserIcon() {
+export async function UserIconButton() {
     const user = await useGetUser();
     if(user == null) return <></>;
     else return (
