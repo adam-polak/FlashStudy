@@ -15,7 +15,7 @@ public class UserKeyModel : ISqlModel
         EndDate = endDate;
     }
 
-    public List<ISqlValue> GetValues()
+    public List<ISqlValue> GetSqlValues()
     {
         SqlValueFactory factory = new SqlValueFactory();
         List<ISqlValue> list =

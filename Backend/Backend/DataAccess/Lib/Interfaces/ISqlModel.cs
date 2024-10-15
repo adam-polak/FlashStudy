@@ -2,5 +2,5 @@ namespace Backend.DataAccess.Lib;
 
 public interface ISqlModel
 {
-    public List<ISqlValue> GetValues();
+    public List<ISqlValue> GetSqlValues();
 }
