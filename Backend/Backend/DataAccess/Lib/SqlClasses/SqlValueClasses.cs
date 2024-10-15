@@ -34,7 +34,8 @@ public class StringSqlValue : AbstractSqlValue
         "#",
         "/",
         "*",
-        "!"
+        "!",
+        "="
     ];
 
     public StringSqlValue(string name, string value) : base(name)
